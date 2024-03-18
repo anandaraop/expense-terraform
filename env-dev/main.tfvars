@@ -1,1 +1,5 @@
-env = "dev"
+env           = "dev"
+instance_type = "t3.small"
+ssh_user      = "ec2-user"
+ssh_pass      = "DevOps321"
+zome_id       = "Z02385991VFZVIKN8WPK8"
