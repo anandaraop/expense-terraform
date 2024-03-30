@@ -12,7 +12,3 @@ data "vault_generic_secret" "ssh" {
   path = "common/ssh"
 }
 
-data "vault_generic_secret" "ssh" {
-  path = "common/ssh"
-}
-
