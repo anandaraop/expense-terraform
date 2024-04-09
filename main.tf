@@ -10,19 +10,19 @@
 #   subnets       = module.vpc.frontend_subnets
 #   vpc_id        = module.vpc.vpc_id
 # }
-#
-# module "backend" {
-#   depends_on = [module.mysql]
-#
-#   source        = "./modules/app"
-#   instance_type = var.instance_type
-#   component     = "backend"
-#   env           = var.env
-#   zone_id       = var.zone_id
-#   vault_token   = var.vault_token
-#   subnets       = module.vpc.backend_subnets
-#   vpc_id        = module.vpc.vpc_id
-# }
+
+module "backend" {
+  depends_on = [module.mysql]
+
+  source        = "./modules/app"
+  instance_type = var.instance_type
+  component     = "backend"
+  env           = var.env
+  zone_id       = var.zone_id
+  vault_token   = var.vault_token
+  subnets       = module.vpc.backend_subnets
+  vpc_id        = module.vpc.vpc_id
+}
 
 module "mysql" {
   source        = "./modules/app"
