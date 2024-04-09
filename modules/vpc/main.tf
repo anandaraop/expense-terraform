@@ -46,7 +46,7 @@ resource "aws_route_table" "public" {
   }
 
   route {
-    cidr_block                = "0.0.0.0/0"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
 
@@ -58,11 +58,11 @@ resource "aws_route_table" "public" {
 
 resource "aws_eip" "ngw" {
   count  = length(var.public_subnets)
-  domain   = "vpc"
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "ngw" {
-  count  = length(var.public_subnets)
+  count         = length(var.public_subnets)
   allocation_id = aws_eip.ngw[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
 
@@ -98,8 +98,8 @@ resource "aws_route_table" "frontend" {
   }
 
   route {
-    cidr_block                = "0.0.0.0/0"
-    nat_gateway_id            = aws_nat_gateway.ngw[count.index].id
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw[count.index].id
   }
 
   tags = {
@@ -135,8 +135,8 @@ resource "aws_route_table" "backend" {
   }
 
   route {
-    cidr_block                = "0.0.0.0/0"
-    nat_gateway_id            = aws_nat_gateway.ngw[count.index].id
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw[count.index].id
   }
 
   tags = {
@@ -173,8 +173,8 @@ resource "aws_route_table" "db" {
   }
 
   route {
-    cidr_block                = "0.0.0.0/0"
-    nat_gateway_id            = aws_nat_gateway.ngw[count.index].id
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw[count.index].id
   }
 
   tags = {
