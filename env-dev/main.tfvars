@@ -18,4 +18,7 @@ prometheus_nodes   = ["172.31.89.157/32"]
 certificate_arn    = "arn:aws:acm:us-east-1:633788536644:certificate/274d4c80-dc76-4296-b3ed-d959cbe837ba"
 kms_key_id         = "arn:aws:kms:us-east-1:633788536644:key/efe13dd4-b31e-405a-ad13-0526cce7fd93"
 
+# ASG
+max_capacity = 5
+min_capacity = 1
 
