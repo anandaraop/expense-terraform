@@ -52,11 +52,17 @@ resource "aws_autoscaling_group" "main" {
   vpc_zone_identifier   = var.subnets
   target_group_arns     = [aws_lb_target_group.main.arn]
 
-
   launch_template {
     id      = aws_launch_template.main.id
     version = "$Latest"
   }
+
+  tag {
+    key                 = "Name"
+    value               = "${var.component}-${var.env}"
+    propagate_at_launch = true
+  }
+
 }
 
 resource "aws_autoscaling_policy" "main" {
