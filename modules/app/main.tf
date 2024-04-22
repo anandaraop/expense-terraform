@@ -45,7 +45,7 @@ resource "aws_instance" "instance" {
   subnet_id              = var.subnets[0]
 
   root_block_device {
-    encrypted = true
+    encrypted  = true
     kms_key_id = var.kms_key_id
   }
 

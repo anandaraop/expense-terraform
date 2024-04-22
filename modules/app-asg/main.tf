@@ -37,10 +37,10 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_launch_template" "main" {
-  name                    = "${var.component}-${var.env}"
-  image_id                = data.aws_ami.ami.id
-  instance_type           = var.instance_type
-  vpc_security_group_ids  = [aws_security_group.main.id]
+  name                   = "${var.component}-${var.env}"
+  image_id               = data.aws_ami.ami.id
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [aws_security_group.main.id]
 
   user_data = base64encode(templatefile("${path.module}/userdata.sh", {
     component   = var.component
@@ -52,12 +52,12 @@ resource "aws_launch_template" "main" {
 
 
 resource "aws_autoscaling_group" "main" {
-  name                  = "${var.component}-${var.env}"
-  desired_capacity      = var.min_capacity
-  max_size              = var.max_capacity
-  min_size              = var.min_capacity
-  vpc_zone_identifier   = var.subnets
-  target_group_arns     = [aws_lb_target_group.main.arn]
+  name                = "${var.component}-${var.env}"
+  desired_capacity    = var.min_capacity
+  max_size            = var.max_capacity
+  min_size            = var.min_capacity
+  vpc_zone_identifier = var.subnets
+  target_group_arns   = [aws_lb_target_group.main.arn]
 
   launch_template {
     id      = aws_launch_template.main.id
